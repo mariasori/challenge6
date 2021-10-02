@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+
+    <!--header-->
+    <div id="header">
+        <h1>Weather Dashboard</h1>
+    </div>
+    
+    <!--main container-->
+    <main class="container-fluid">
+        <div class="row">
+
+            <!--left column - search bar and previously searched cities-->
+            <div id="left-column" class="col-md-3">
+                <form>
+                    <h2>Search for a City:</h2>
+                    <div class="form-row">
+                        <input id="user-input" class="form-control" placeholder="San Diego">
+                        <button type="submit" id="searchBtn" class="btn btn-sm btn-primary btn-block">Search</button>
+                    </div>
+                </form>
+
+                <!--div to hold previous searches-->
+                <div id="previousSearches"></div>
+
+            </div>
+
+            <!--right column - current conditions and future forecast-->
+            <div id="right-column" class="col-md-9">
+                <!--current conditions-->
+                <div class="card" id="current-weather">
+                    <div class="card-body">
+                        <p id="name-date-img">
+                            <span id="city-name">City Name</span>
+                            <span id="current-img"></span>
+                        </p>
+                        <p id="temperature">Temperature</p>
+                        <p id="wind">Wind</p>
+                        <p id="humidity">Humidity</p>
+                        <p id="UV-index">UV Index</p>
+                    </div>
+                </div>
+
+                <!--future forecast for 5 days-->
+                <div class="row" id="five-day-forecast"> <!--need to add d-none class functioning-->
+                    <h3 class="col-12">5-Day Forecast:</h3>
+                    <!--div to hold five day forecast-->
+                    <div class="d-flex" id="five-day-container">
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</main>
+</body>
+</html>
