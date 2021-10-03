@@ -35,18 +35,19 @@
             <!--right column - current conditions and future forecast-->
             <div id="right-column" class="col-md-9">
                 <!--current conditions-->
-                <div class="row border">
+                <div id="weather-container" class="row border">
                     <div class="col-12">
                         <h2 id="name-date-img"></h2>
+                        <!--div to hold current weather-->
                         <div id="current-weather"></div>
                     </div>
                 </div>
 
                 <!--future forecast for 5 days-->
-                <div class="row" id="five-day-forecast"> <!--need to add d-none class functioning-->
-                    <h2 class="col-12">5-Day Forecast:</h3>
+                <div class="row" id="weather-container">
+                    <h2 class="col-12" id="forecast-title"></h2>
                     <!--div to hold five day forecast-->
-                    <div class="d-flex" id="five-day-container">
+                    <div class="d-flex" id="forecast-weather">
                     </div>
                 </div>
             </div>
