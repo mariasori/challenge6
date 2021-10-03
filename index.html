@@ -21,12 +21,10 @@
 
             <!--left column - search bar and previously searched cities-->
             <div id="left-column" class="col-md-3">
-                <form>
+                <form id="search-form">
                     <h2>Search for a City:</h2>
-                    <div class="form-row">
-                        <input id="user-input" class="form-control" placeholder="San Diego">
-                        <button type="submit" id="searchBtn" class="btn btn-sm btn-primary btn-block">Search</button>
-                    </div>
+                    <input id="user-input" class="form-control" placeholder="San Diego">
+                    <button type="submit" id="search-button" class="btn btn-sm btn-primary btn-block">Search</button>
                 </form>
 
                 <!--div to hold previous searches-->
@@ -37,22 +35,16 @@
             <!--right column - current conditions and future forecast-->
             <div id="right-column" class="col-md-9">
                 <!--current conditions-->
-                <div class="card" id="current-weather">
-                    <div class="card-body">
-                        <p id="name-date-img">
-                            <span id="city-name">City Name</span>
-                            <span id="current-img"></span>
-                        </p>
-                        <p id="temperature">Temperature</p>
-                        <p id="wind">Wind</p>
-                        <p id="humidity">Humidity</p>
-                        <p id="UV-index">UV Index</p>
+                <div class="row border">
+                    <div class="col-12">
+                        <h2 id="name-date-img"></h2>
+                        <div id="current-weather"></div>
                     </div>
                 </div>
 
                 <!--future forecast for 5 days-->
                 <div class="row" id="five-day-forecast"> <!--need to add d-none class functioning-->
-                    <h3 class="col-12">5-Day Forecast:</h3>
+                    <h2 class="col-12">5-Day Forecast:</h3>
                     <!--div to hold five day forecast-->
                     <div class="d-flex" id="five-day-container">
                     </div>
@@ -60,7 +52,12 @@
             </div>
         
         </div>
-    </div>
-</main>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+
 </body>
 </html>
