@@ -102,28 +102,33 @@ var displayForecast = function(weather){
         for(var i=0; i < forecast.length; i+= 8){
 
             var forecastCard = document.createElement("div");
-            forecastCard.classList = "card bg-primary text-light";
-            console.log(forecastCard);
+            forecastCard.setAttribute("id", "forecastCard");
+            forecastCard.classList = "card bg-primary text-light d-flex";
+
+            var dateObject = new Date(forecast[i].dt * 1000)
+            var dateFormat = dateObject.toLocaleDateString("en-US");
+            var date = document.createElement("h3");
+            date.textContent= dateFormat
+                        
+            var temp = forecast[i].main.temp;
+            var tempSpan = document.createElement("span");
+            tempSpan.textContent = "Temp: " + temp;            
+
+            var wind = forecast[i].wind.speed;
+            var windSpan = document.createElement("span");
+            windSpan.textContent = "Wind: " + wind + " MPH";  
+            
+            var hum = forecast[i].main.humidity;
+            var humSpan = document.createElement("span");
+            humSpan.textContent = "Humidity " + hum;
+
+            forecastCard.appendChild(date);
+            forecastCard.appendChild(tempSpan);
+            forecastCard.appendChild(windSpan);
+            forecastCard.appendChild(humSpan);
 
             forecastWeatherEl.appendChild(forecastCard);
 
-            var date = moment(forecast[i].dt.value).format("MM/DD/YYYY");
-            console.log(date);
-            
-            var temp = forecast[i].main.temp;
-            temp.textContent = "Temp: " + temp;  
-            console.log(temp);           
-            
-            var hum = forecast[i].main.humidity;
-            hum.textContent = "Humidity " + hum;
-            console.log(hum);
-
-            //forecastCard.appendChild(date);
-
-            //forecastCard.appendChild(temp);
-            //forecastCard.appendChild(hum);
-
-            //forecastWeatherEl.appendChild(forecastCard);
         }
 }
 
