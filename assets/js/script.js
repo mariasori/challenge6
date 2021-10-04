@@ -35,8 +35,16 @@ var cityWeather = function(city){
 
 var displayWeather = function (weather, searchCity){
     currentWeatherEl.textContent = "";
-    searchedCityEl.textContent = searchCity + " (" + moment(weather.dt.value).format("MM/DD/YYYY") + ") " ;
-    
+   
+    var weatherIconEl = document.createElement("span");
+    var weatherIcon = document.createElement("img");
+    weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`);
+    weatherIconEl.appendChild(weatherIcon);
+
+    searchedCityEl.textContent = searchCity + " (" + moment(weather.dt.value).format("MM/DD/YYYY") + ") ";  
+    searchedCityEl.appendChild(weatherIconEl);
+
+
     var temperatureEl = document.createElement("div");
     temperatureEl.textContent = "Temp: " + weather.main.temp + " °F";
     currentWeatherEl.appendChild(temperatureEl);
@@ -75,6 +83,17 @@ var displayUvIndex = function(index){
 
     var uvIndexValue = document.createElement("span");
     uvIndexValue.textContent = index.value;
+    if (uvIndexValue <= 2) {
+        uvIndexValue.classList = "favorable"
+    }
+    else if (2 < uvIndexValue <=7){
+        uvIndexValue.classList = "moderate"
+    }
+    else if (uvIndexValue > 7) {
+        uvIndexValue.classList = "severe"
+    }
+
+
 
     uvIndexEl.appendChild(uvIndexValue);
 
@@ -109,20 +128,28 @@ var displayForecast = function(weather){
             var dateFormat = dateObject.toLocaleDateString("en-US");
             var date = document.createElement("h3");
             date.textContent= dateFormat
-                        
+ 
+            var weatherIconEl = document.createElement("div");
+            var weatherIcon = document.createElement("img");
+            weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${forecast[i].weather[0].icon}.png`);
+            weatherIconEl.appendChild(weatherIcon);
+            console.log(weatherIcon)
+            console.log(weatherIconEl)
+                         
             var temp = forecast[i].main.temp;
-            var tempSpan = document.createElement("span");
+            var tempSpan = document.createElement("div");
             tempSpan.textContent = "Temp: " + temp;            
 
             var wind = forecast[i].wind.speed;
-            var windSpan = document.createElement("span");
+            var windSpan = document.createElement("div");
             windSpan.textContent = "Wind: " + wind + " MPH";  
             
             var hum = forecast[i].main.humidity;
-            var humSpan = document.createElement("span");
+            var humSpan = document.createElement("div");
             humSpan.textContent = "Humidity " + hum;
 
             forecastCard.appendChild(date);
+            forecastCard.appendChild(weatherIconEl);
             forecastCard.appendChild(tempSpan);
             forecastCard.appendChild(windSpan);
             forecastCard.appendChild(humSpan);

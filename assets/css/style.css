@@ -38,8 +38,21 @@ h3 {
     background-color: #33475a !important;
     font-family:Arial, Helvetica, sans-serif;
     margin: 10px;
+    border-radius: 0px;
 }
 
 h3 {
     font-weight: bold;
+}
+
+.favorable {
+    background-color: green;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.severe {
+    background-color: red;
 }
