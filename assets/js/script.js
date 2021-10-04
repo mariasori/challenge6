@@ -99,7 +99,7 @@ var displayUvIndex = function(index){
         $(uvIndexValue).removeClass("moderate")
         $(uvIndexValue).addClass("severe")
     }
-    else if (2 < index.value <= 7){
+    else if (index.value > 2){
         $(uvIndexValue).removeClass("favorable")
         $(uvIndexValue).addClass("moderate")
         $(uvIndexValue).removeClass("severe")
