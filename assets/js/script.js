@@ -1,5 +1,6 @@
 var cities = [];
 
+//variable declarations
 var searchBtnEl = document.querySelector("#search-button");
 var userInputEl = document.querySelector("#user-input");
 var currentWeatherEl = document.querySelector("#current-weather");
@@ -8,6 +9,7 @@ var forecastWeatherEl = document.querySelector("#forecast-weather");
 var forecastTitleEl = document.querySelector("#forecast-title");
 var previousSearchesEl = document.querySelector("#previous-searches");
 
+// search bar function to display current and future weather
 var formSubmitHandler = function(event){
     event.preventDefault();
     var city = userInputEl.value.trim();
@@ -26,6 +28,7 @@ var formSubmitHandler = function(event){
     previousSearch(city);
 }
 
+//fetch weather info from api
 var cityWeather = function(city){
     var apiKey = "c29dbdf00b06a84cdf3735b1122c2101"
     var apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
@@ -39,6 +42,7 @@ var cityWeather = function(city){
 
 };
 
+//display current weather
 var displayWeather = function (weather, searchCity){
     currentWeatherEl.textContent = "";
    
@@ -67,6 +71,7 @@ var displayWeather = function (weather, searchCity){
     uvIndex(lat,lon);
 };
 
+// get latitude/longitude information for UV index
 var uvIndex = function (lat,lon){
     var apiKey = "c29dbdf00b06a84cdf3735b1122c2101"
     var apiURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
@@ -78,28 +83,36 @@ var uvIndex = function (lat,lon){
         });
     });
 }
-
+// display UV index and color code by severity
 var displayUvIndex = function(index){
     var uvIndexEl = document.createElement("div");
     uvIndexEl.textContent = "UV Index: ";
 
     var uvIndexValue = document.createElement("span");
     uvIndexValue.textContent = index.value;
-    if (uvIndexValue <= 2) {
-        uvIndexValue.classList = "favorable"
-    }
-    else if (2 < uvIndexValue <=7){
-        uvIndexValue.classList = "moderate"
-    }
-    else if (uvIndexValue > 7) {
-        uvIndexValue.classList = "severe"
-    }
 
+    if (index.value > 7) {
+        $(uvIndexValue).removeClass("favorable")
+        $(uvIndexValue).removeClass("moderate")
+        $(uvIndexValue).addClass("severe")
+    }
+    else if (2 < index.value <= 7){
+        $(uvIndexValue).removeClass("favorable")
+        $(uvIndexValue).addClass("moderate")
+        $(uvIndexValue).removeClass("severe")
+    }
+    else {
+        $(uvIndexValue).addClass("favorable")
+        $(uvIndexValue).removeClass("moderate")
+        $(uvIndexValue).removeClass("severe")   
+     }
+    
     uvIndexEl.appendChild(uvIndexValue);
 
     currentWeatherEl.appendChild(uvIndexEl);
 }
 
+// fetch data for 5 day forecast
 var fiveDayForecast = function(city) {
     var apiKey = "c29dbdf00b06a84cdf3735b1122c2101"
     var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
@@ -113,6 +126,7 @@ var fiveDayForecast = function(city) {
     });
 };
 
+//display 5 day forecast
 var displayForecast = function(weather){
     forecastWeatherEl.textContent = "";
     forecastTitleEl.textContent = "5 Day Forecast";
@@ -157,12 +171,13 @@ var displayForecast = function(weather){
         }
 }
 
+// save search item in localStorage cities array
 var saveSearch = function() {
     localStorage.setItem("cities", JSON.stringify(cities));
 };
 
+// create button for previous search
 var previousSearch = function(previousSearch){
-
     previousSearchBtn = document.createElement("button");
     previousSearchBtn.textContent = previousSearch;
     previousSearchBtn.classList = "d-flex btn-sm btn-block btn-secondary"
@@ -173,6 +188,7 @@ var previousSearch = function(previousSearch){
 
 }
 
+// function for previous search buttons
 var previousSearchHandler = function(event) {
     var city = event.target.getAttribute("data-city")
     if (city) {
@@ -180,5 +196,7 @@ var previousSearchHandler = function(event) {
         fiveDayForecast(city);
     }
 }
+
+//event listeners
 searchBtnEl.addEventListener("click", formSubmitHandler);
 previousSearchesEl.addEventListener("click", previousSearchHandler)
