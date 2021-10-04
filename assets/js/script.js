@@ -8,6 +8,7 @@ var searchedCityEl = document.querySelector("#name-date-img");
 var forecastWeatherEl = document.querySelector("#forecast-weather");
 var forecastTitleEl = document.querySelector("#forecast-title");
 var previousSearchesEl = document.querySelector("#previous-searches");
+var currentWeatherCont = document.querySelector("#current-weather-container");
 
 // search bar function to display current and future weather
 var formSubmitHandler = function(event){
@@ -45,6 +46,7 @@ var cityWeather = function(city){
 //display current weather
 var displayWeather = function (weather, searchCity){
     currentWeatherEl.textContent = "";
+    $("#current-weather-container").removeClass("d-none");
    
     var weatherIconEl = document.createElement("span");
     var weatherIcon = document.createElement("img");
