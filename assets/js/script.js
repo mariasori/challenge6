@@ -85,6 +85,7 @@ var uvIndex = function (lat,lon){
         });
     });
 }
+
 // display UV index and color code by severity
 var displayUvIndex = function(index){
     var uvIndexEl = document.createElement("div");
