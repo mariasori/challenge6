@@ -6,8 +6,7 @@ This challenge required me to create a Weather Dashboard. When a user searches a
 
 ## Screenshot
 
-![image](https://user-images.githubusercontent.com/88404610/135781653-b6d52ad0-465b-472a-9215-3a19eb9333b5.png)
-
+![image](https://user-images.githubusercontent.com/88404610/135791364-4e48a193-d5f7-4524-8d4c-147c55294bcd.png)
 
 ## Link to Application
 
