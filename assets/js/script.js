@@ -76,7 +76,7 @@ var displayWeather = function (weather, searchCity){
 // get latitude/longitude information for UV index
 var uvIndex = function (lat,lon){
     var apiKey = "c29dbdf00b06a84cdf3735b1122c2101"
-    var apiURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
+    var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
 
     fetch(apiURL)
     .then(function(response){
