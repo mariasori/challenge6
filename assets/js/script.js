@@ -1,9 +1,12 @@
+var cities = [];
+
 var searchBtnEl = document.querySelector("#search-button");
 var userInputEl = document.querySelector("#user-input");
 var currentWeatherEl = document.querySelector("#current-weather");
 var searchedCityEl = document.querySelector("#name-date-img");
 var forecastWeatherEl = document.querySelector("#forecast-weather");
 var forecastTitleEl = document.querySelector("#forecast-title");
+var previousSearchesEl = document.querySelector("#previous-searches");
 
 var formSubmitHandler = function(event){
     event.preventDefault();
@@ -12,11 +15,15 @@ var formSubmitHandler = function(event){
     if(city){
         cityWeather(city);
         fiveDayForecast(city);
+        cities.unshift({city})
         userInputEl.value = "";
     }
     else {
         alert("Please enter a city.")
     }
+
+    saveSearch();
+    previousSearch(city);
 }
 
 var cityWeather = function(city){
@@ -27,7 +34,6 @@ var cityWeather = function(city){
     .then(function(response){
         response.json().then(function(data){
             displayWeather(data, city);
-            console.log(data);
         });
     });
 
@@ -43,7 +49,6 @@ var displayWeather = function (weather, searchCity){
 
     searchedCityEl.textContent = searchCity + " (" + moment(weather.dt.value).format("MM/DD/YYYY") + ") ";  
     searchedCityEl.appendChild(weatherIconEl);
-
 
     var temperatureEl = document.createElement("div");
     temperatureEl.textContent = "Temp: " + weather.main.temp + " °F";
@@ -70,11 +75,8 @@ var uvIndex = function (lat,lon){
     .then(function(response){
         response.json().then(function(data){
             displayUvIndex(data)
-            console.log(data)
         });
     });
-    console.log(lat);
-    console.log(lon);
 }
 
 var displayUvIndex = function(index){
@@ -92,8 +94,6 @@ var displayUvIndex = function(index){
     else if (uvIndexValue > 7) {
         uvIndexValue.classList = "severe"
     }
-
-
 
     uvIndexEl.appendChild(uvIndexValue);
 
@@ -133,8 +133,6 @@ var displayForecast = function(weather){
             var weatherIcon = document.createElement("img");
             weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${forecast[i].weather[0].icon}.png`);
             weatherIconEl.appendChild(weatherIcon);
-            console.log(weatherIcon)
-            console.log(weatherIconEl)
                          
             var temp = forecast[i].main.temp;
             var tempSpan = document.createElement("div");
@@ -159,4 +157,28 @@ var displayForecast = function(weather){
         }
 }
 
+var saveSearch = function() {
+    localStorage.setItem("cities", JSON.stringify(cities));
+};
+
+var previousSearch = function(previousSearch){
+
+    previousSearchBtn = document.createElement("button");
+    previousSearchBtn.textContent = previousSearch;
+    previousSearchBtn.classList = "d-flex btn-sm btn-block btn-secondary"
+    previousSearchBtn.setAttribute("data-city", previousSearch);
+    previousSearchBtn.setAttribute("type", "submit");
+
+    previousSearchesEl.prepend(previousSearchBtn);
+
+}
+
+var previousSearchHandler = function(event) {
+    var city = event.target.getAttribute("data-city")
+    if (city) {
+        cityWeather(city);
+        fiveDayForecast(city);
+    }
+}
 searchBtnEl.addEventListener("click", formSubmitHandler);
+previousSearchesEl.addEventListener("click", previousSearchHandler)
